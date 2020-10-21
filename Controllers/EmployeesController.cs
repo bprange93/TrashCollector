@@ -29,8 +29,10 @@ namespace Identity_Practice.Controllers
             {
                 return RedirectToAction("Create");
             }
-            var applicationDbContext = await _context.Customers.Where(c => c.Zipcode == CurrentEmployee.Zipcode).ToListAsync(); ;
+            string dayOfWeek = DateTime.Today.DayOfWeek.ToString();
+            var applicationDbContext = await _context.Customers.Where((c => c.Zipcode == CurrentEmployee.Zipcode && c.PickUpDay == dayOfWeek)).ToListAsync();
             return View( applicationDbContext);
+           
         }
 
         // GET: Employees/Details/5
