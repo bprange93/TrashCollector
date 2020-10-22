@@ -104,6 +104,10 @@ namespace Identity_Practice.Controllers
 
             if (ModelState.IsValid)
             {
+                if (customer.ConfirmPickUp == true)
+                {
+                    customer.Balance += 50;
+                }
                 try
                 {
                     _context.Update(customer);
@@ -111,10 +115,6 @@ namespace Identity_Practice.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if( == true)
-                    {
-
-                    }
                     if (!CustomerExists(customer.Id))
                     {
                         return NotFound();
