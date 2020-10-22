@@ -81,22 +81,22 @@ namespace Identity_Practice.Controllers
         }
 
         // GET: Employees/Edit/5
-        public async Task<IActionResult> Edit(bool? ConfirmPickUp)
+        public async Task<IActionResult> Edit(bool ConfirmPickUp)
         {
 
-            if (ConfirmPickUp == true)
+            if (ConfirmPickUp == false)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Edit));
             }
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var CurrentEmployee = _context.Employees.Where(e => e.IdentityUserId == userId).SingleOrDefault();
             var employee = await _context.Employees.FindAsync();
             if (employee == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Index));
             }
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", employee.IdentityUserId);
-            return View(employee);
+            return View();
         }
 
         // POST: Employees/Edit/5
