@@ -24,8 +24,8 @@ namespace Identity_Practice.Controllers
         public async Task<IActionResult> Index()
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var CurrentEmployee = _context.Employees.Where(e => e.IdentityUserId == userId).Single();
-            if(CurrentEmployee == null)
+            var CurrentEmployee = _context.Employees.Where(e => e.IdentityUserId == userId).SingleOrDefault();
+            if (CurrentEmployee == null)
             {
                 return RedirectToAction("Create");
             }
@@ -81,14 +81,16 @@ namespace Identity_Practice.Controllers
         }
 
         // GET: Employees/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(bool? ConfirmPickUp)
         {
-            if (id == null)
+
+            if (ConfirmPickUp == true)
             {
                 return NotFound();
             }
-
-            var employee = await _context.Employees.FindAsync(id);
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var CurrentEmployee = _context.Employees.Where(e => e.IdentityUserId == userId).SingleOrDefault();
+            var employee = await _context.Employees.FindAsync();
             if (employee == null)
             {
                 return NotFound();
