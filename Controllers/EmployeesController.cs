@@ -34,6 +34,13 @@ namespace Identity_Practice.Controllers
             return View( applicationDbContext);
            
         }
+        public async Task<IActionResult> IndexOfAllCustomers()
+        {
+           
+            var applicationDbContext = await _context.Customers.ToListAsync();
+            return View(applicationDbContext);
+
+        }
 
         // GET: Employees/Details/5
         public async Task<IActionResult> Details(int? id)
