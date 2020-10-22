@@ -22,6 +22,7 @@ namespace Identity_Practice.Models
         public string State  { get; set; }
         public double Balance { get; set; }
         public string PickUpDay { get; set; }
+        public bool ConfirmedPickUp { get; set; }
         public DateTime ExtraPickUpDay { get; set; }
         public DateTime SuspendStart { get; set; }
         public DateTime SuspendEnd { get; set; }

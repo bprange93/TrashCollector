@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Identity_Practice.Data;
 using Identity_Practice.Models;
 using System.Security.Claims;
+using Identity_Practice.Migrations;
 
 namespace Identity_Practice.Controllers
 {
@@ -94,7 +95,7 @@ namespace Identity_Practice.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,Street,City,Zipcode,State,Balance,PickUpDay,ExtraPickUpDay,SuspendStart,SuspendEnd,IdentityUserId")] Customer customer)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,Street,City,Zipcode,State,Balance,PickUpDay,ConfirmPickUp,ExtraPickUpDay,SuspendStart,SuspendEnd,IdentityUserId")] Customer customer)
         {
             if (id != customer.Id)
             {
@@ -110,6 +111,10 @@ namespace Identity_Practice.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
+                    if( == true)
+                    {
+
+                    }
                     if (!CustomerExists(customer.Id))
                     {
                         return NotFound();
