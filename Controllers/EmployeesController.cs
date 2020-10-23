@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Identity_Practice.Data;
 using Identity_Practice.Models;
 using System.Security.Claims;
+using Identity_Practice.Migrations;
 
 namespace Identity_Practice.Controllers
 {
@@ -110,27 +111,27 @@ namespace Identity_Practice.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,PickUpComplete,LastName,Zipcode,IdentityUserId")] Employee employee)
+        public async Task<IActionResult> Edit(int id, Customer customer)
         {
-            if (id != employee.Id)
+            if (id != customer.Id)
             {
                 return NotFound();
             }
-            //if (employee.PickUpComplete == true)
-            //{
-            //     += 50;
-            //}
+            if (customer.ConfirmPickUp == true)
+            {
+                 customer.Balance += 50;
+            }
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(employee);
+                    _context.Update(customer);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!EmployeeExists(employee.Id))
+                    if (!EmployeeExists(customer.Id))
                     {
                         return NotFound();
                     }
@@ -141,8 +142,8 @@ namespace Identity_Practice.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", employee.IdentityUserId);
-            return View(employee);
+            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
+            return View(customer);
         }
 
         // GET: Employees/Delete/5
