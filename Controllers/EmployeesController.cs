@@ -88,35 +88,38 @@ namespace Identity_Practice.Controllers
         }
 
         // GET: Employees/Edit/5
-        public async Task<IActionResult> Edit(bool ConfirmPickUp)
+        public async Task<IActionResult> Edit(int? id)
         {
-
-            if (ConfirmPickUp == false)
+            if (id == null)
             {
-                return RedirectToAction(nameof(Edit));
+                return NotFound();
             }
-            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var CurrentEmployee = _context.Employees.Where(e => e.IdentityUserId == userId).SingleOrDefault();
-            var employee = await _context.Employees.FindAsync();
+
+            var employee = await _context.Employees.FindAsync(id);
             if (employee == null)
             {
-                return RedirectToAction(nameof(Index));
+                return NotFound();
             }
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", employee.IdentityUserId);
-            return View();
+            return View(employee);
         }
+
 
         // POST: Employees/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,Zipcode,IdentityUserId")] Employee employee)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,PickUpComplete,LastName,Zipcode,IdentityUserId")] Employee employee)
         {
             if (id != employee.Id)
             {
                 return NotFound();
             }
+            //if (employee.PickUpComplete == true)
+            //{
+            //     += 50;
+            //}
 
             if (ModelState.IsValid)
             {
