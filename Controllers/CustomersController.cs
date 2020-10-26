@@ -108,11 +108,17 @@ namespace Identity_Practice.Controllers
                 {
                     customer.Balance += 50;
                 }
+                
                 try
                 {
                     _context.Update(customer);
                     await _context.SaveChangesAsync();
                 }
+                //if()
+                //{
+                //    customer.ConfirmPickUp == false;
+                //}
+
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!CustomerExists(customer.Id))
