@@ -25,7 +25,7 @@ namespace Identity_Practice.Controllers
         public async Task<IActionResult> Index()
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var CurrentEmployee = _context.Employees.Where(e => e.IdentityUserId == userId).SingleOrDefault();
+            var CurrentEmployee = _context.Employees.Where(e => e.IdentityUserId == userId).Single();
             if (CurrentEmployee == null)
             {
                 return RedirectToAction("Create");
@@ -120,6 +120,9 @@ namespace Identity_Practice.Controllers
             if (customer.ConfirmPickUp == true)
             {
                  customer.Balance += 50;
+                
+
+                
             }
 
             if (ModelState.IsValid)

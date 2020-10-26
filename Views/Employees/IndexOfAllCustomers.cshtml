@@ -7,9 +7,7 @@
 
 <h1>IndexOfAllCustomers</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
 <table class="table">
     <thead>
         <tr>
@@ -49,9 +47,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.SuspendEnd)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdentityUser)
-            </th>
+            
             <th></th>
         </tr>
     </thead>
@@ -94,9 +90,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.SuspendEnd)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdentityUser.Id)
-            </td>
+            
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
