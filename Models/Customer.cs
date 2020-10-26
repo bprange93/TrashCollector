@@ -21,10 +21,15 @@ namespace Identity_Practice.Models
         public  string Zipcode { get; set; }
         public string State  { get; set; }
         public double Balance { get; set; }
+        [Display(Name = "Pick Up Day")]
         public string PickUpDay { get; set; }
+        [Display(Name = "Confirm Pick Up")]
         public bool ConfirmPickUp { get; set; }
+        [Display(Name = "Extra Pick Up Day")]
         public DateTime ExtraPickUpDay { get; set; }
+        [Display(Name = "Suspend Start")]
         public DateTime SuspendStart { get; set; }
+        [Display(Name = "Suspend End")]
         public DateTime SuspendEnd { get; set; }
         [ForeignKey("IdentityUser")]
         public string IdentityUserId { get; set; }
