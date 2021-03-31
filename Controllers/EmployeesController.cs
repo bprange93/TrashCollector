@@ -112,6 +112,7 @@ namespace Identity_Practice.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        //Changing to int instead of IActionResult to try and update balance to keep increasing each time pick
         public async Task<IActionResult> Edit(int id, Customer customer)
         {
             if (id != customer.Id)
@@ -120,11 +121,14 @@ namespace Identity_Practice.Controllers
             }
             if (customer.ConfirmPickUp == true)
             {
-                 _context.Update(customer.Balance + 50);
+                customer.Balance += 50.00;
+                
+                 _context.Update(customer);
                 await _context.SaveChangesAsync();
-                
 
-                
+                customer.ConfirmPickUp = false;
+
+
             }
 
             if (ModelState.IsValid)
