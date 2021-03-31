@@ -15,6 +15,7 @@ namespace Identity_Practice.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Zipcode { get; set; }
+        [Display(Name = "Confirm Pick Up")]
         public bool ConfirmPickUp { get; set; }
 
         [ForeignKey("IdentityUser")]
