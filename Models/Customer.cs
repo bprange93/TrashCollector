@@ -20,6 +20,7 @@ namespace Identity_Practice.Models
         public string City { get; set; }
         public  string Zipcode { get; set; }
         public string State  { get; set; }
+        [DataType(DataType.Currency)]
         public double Balance { get; set; }
         [Display(Name = "Pick Up Day")]
         public string PickUpDay { get; set; }
