@@ -121,7 +121,7 @@ namespace Identity_Practice.Controllers
             }
             if (customer.ConfirmPickUp == true)
             {
-                customer.Balance += 50.00;
+                customer.Balance = customer.Balance + 50.00;
                 
                  _context.Update(customer);
                 await _context.SaveChangesAsync();
