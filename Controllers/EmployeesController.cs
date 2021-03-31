@@ -22,10 +22,11 @@ namespace Identity_Practice.Controllers
         }
 
         // GET: Employees
+        //SingleorDefault must be used here in order to make sure if Employee isn't created they go to create page. 
         public async Task<IActionResult> Index()
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var CurrentEmployee = _context.Employees.Where(e => e.IdentityUserId == userId).Single();
+            var CurrentEmployee = _context.Employees.Where(e => e.IdentityUserId == userId).SingleOrDefault();
             if (CurrentEmployee == null)
             {
                 return RedirectToAction("Create");
@@ -119,7 +120,8 @@ namespace Identity_Practice.Controllers
             }
             if (customer.ConfirmPickUp == true)
             {
-                 customer.Balance += 50;
+                 _context.Update(customer.Balance + 50);
+                await _context.SaveChangesAsync();
                 
 
                 
