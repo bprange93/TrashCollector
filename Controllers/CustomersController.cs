@@ -59,7 +59,8 @@ namespace Identity_Practice.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Street,City,Zipcode,State,Balance,PickUpDay,ExtraPickUpDay,SuspendStart,SuspendEnd")] Customer customer)
+        //Took suspend and extra pickup day out. Not required when being created. 
+        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Street,City,Zipcode,State,Balance,PickUpDay")] Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -93,9 +94,10 @@ namespace Identity_Practice.Controllers
         // POST: Customers/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //Took out IdentityUserId from the bind. Attempting to hide from being seen by everyone
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,Street,City,Zipcode,State,Balance,PickUpDay,ConfirmPickUp,ExtraPickUpDay,SuspendStart,SuspendEnd,IdentityUserId")] Customer customer)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,Street,City,Zipcode,State,Balance,PickUpDay,ConfirmPickUp,ExtraPickUpDay,SuspendStart,SuspendEnd")] Customer customer)
         {
             if (id != customer.Id)
             {
@@ -114,11 +116,7 @@ namespace Identity_Practice.Controllers
                     _context.Update(customer);
                     await _context.SaveChangesAsync();
                 }
-                //if()
-                //{
-                //    customer.ConfirmPickUp == false;
-                //}
-
+                
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!CustomerExists(customer.Id))
