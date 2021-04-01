@@ -22,6 +22,7 @@ namespace Identity_Practice.Models
         public string State  { get; set; }
         [DataType(DataType.Currency)]
         public double Balance { get; set; }
+        [DataType(DataType.Date)]
         [Display(Name = "Pick Up Day")]
         public string PickUpDay { get; set; }
         [Display(Name = "Confirm Pick Up")]
