@@ -109,11 +109,16 @@ namespace Identity_Practice.Controllers
                 if (customer.ConfirmPickUp == true)
                 {
                     customer.Balance += 50;
+                    _context.Update(customer.Balance);
+                    await _context.SaveChangesAsync();
+
+                    customer.ConfirmPickUp = false;
+
                 }
-                
+
                 try
                 {
-                    _context.Update(customer);
+                    _context.Update(customer.Balance);
                     await _context.SaveChangesAsync();
                 }
                 
